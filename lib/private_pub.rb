@@ -1,6 +1,7 @@
 require "digest/sha1"
 require "net/http"
 require "net/https"
+require "yaml"
 
 require "private_pub/faye_extension"
 require "private_pub/engine" if defined? Rails
@@ -25,8 +26,14 @@ module PrivatePub
 
     # Publish the given data to a specific channel. This ends up sending
     # a Net::HTTP POST request to the Faye server.
-    def publish_to(channel, data)
-      publish_message(message(channel, data))
+    def publish_to(channel, data, &block)
+      m = nil
+      if block_given?
+        m = block.call(channel, data)
+      else
+        m = message(channel, data)
+      end
+      publish_message(m)
     end
 
     # Sends the given message hash to the Faye server using Net::HTTP.
