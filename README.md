@@ -44,7 +44,7 @@ Use the `publish_to` method to send data to that channel.
 ```ruby
 PrivatePub.publish_to "/messages/new", :chat_message => "Hello, world!" do |channel, data|
   # construct a message here. This message is sent to the subscribed clients e.g.
-  # {:channel => channel, :data => {:channel => channel, :data => data, :time => Time.now}}
+  # {:channel => channel, :data => {:channel => channel, :data => data, :time => Time.now}, :ext => {:private_pub_token => <secret_token from config/private_pub.yml>}}
 end
 ```
 
