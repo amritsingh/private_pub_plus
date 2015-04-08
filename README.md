@@ -39,12 +39,6 @@ rackup private_pub.ru -s thin -E production
 
 ## Usage
 
-Use the `subscribe_to` helper method on any page to subscribe to a channel.
-
-```rhtml
-<%= subscribe_to "/messages/new" %>
-```
-
 Use the `publish_to` method to send data to that channel.
 
 ```ruby
