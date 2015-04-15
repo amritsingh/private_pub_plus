@@ -4,9 +4,9 @@ require "yaml"
 require "faye"
 require "private_pub"
 
-module PrivatePub
+module PrivatePubPlus
   # This class is an extension for the Faye::RackAdapter.
-  # It is used inside of PrivatePub.faye_app.
+  # It is used inside of PrivatePubPlus.faye_app.
   class FayeExtension
     # Callback to handle incoming Faye messages. This authenticates both
     # subscribe and publish calls.
@@ -28,9 +28,9 @@ module PrivatePub
     def authenticate_publish(message)
       # TODO:
       # Code to authenticate the publish message
-      if PrivatePub.config[:secret_token].nil?
+      if PrivatePubPlus.config[:secret_token].nil?
         raise Error, "No secret_token config set, ensure private_pub.yml is loaded properly."
-      elsif message["ext"]["private_pub_token"] != PrivatePub.config[:secret_token]
+      elsif message["ext"]["private_pub_token"] != PrivatePubPlus.config[:secret_token]
         message["error"] = "Incorrect token."
       else
         message["ext"]["private_pub_token"] = nil
@@ -41,5 +41,5 @@ end
 
 Faye::WebSocket.load_adapter('thin')
 
-PrivatePub.load_config(File.expand_path("../config/private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
-run PrivatePub.faye_app
+PrivatePubPlus.load_config(File.expand_path("../config/private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
+run PrivatePubPlus.faye_app

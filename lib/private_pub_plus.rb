@@ -3,10 +3,10 @@ require "net/http"
 require "net/https"
 require "yaml"
 
-require "private_pub/faye_extension"
-require "private_pub/engine" if defined? Rails
+require "private_pub_plus/faye_extension"
+require "private_pub_plus/engine" if defined? Rails
 
-module PrivatePub
+module PrivatePubPlus
   class Error < StandardError; end
 
   class << self
@@ -60,7 +60,7 @@ module PrivatePub
       message
     end
 
-    # Returns a subscription hash to pass to the PrivatePub.sign call in JavaScript.
+    # Returns a subscription hash to pass to the PrivatePubPlus.sign call in JavaScript.
     # Any options passed are merged to the hash.
     def subscription(options = {})
       sub = {:server => config[:server], :timestamp => (Time.now.to_f * 1000).round}.merge(options)
