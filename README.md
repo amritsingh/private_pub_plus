@@ -41,3 +41,22 @@ PrivatePubPlus.publish_to "/messages/new", :chat_message => "Hello, world!" do |
 end
 ```
 
+## To configure backend/engine for the Faye messaging server
+
+To use custom backend for messaging server like (Faye::Redis) make following changes in private_pub.ru
+
+```ruby
+options = {
+  mount: '/',
+  timeout: 25,
+  engine: {
+  type: Faye::Redis,
+  host: 'redis.example.com',
+  # more options
+  }
+}
+
+# Run app with options
+run PrivatePubPlus.faye_app(options)
+```
+
