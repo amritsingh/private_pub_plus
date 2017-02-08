@@ -45,6 +45,7 @@ module PrivatePubPlus
       form.set_form_data(:message => message.to_json)
 
       http = Net::HTTP.new(url.host, url.port)
+      http.read_timeout = config[:timeout] if config[:timeout].present? && config[:timeout].is_a?(Integer)
       http.use_ssl = url.scheme == "https"
       http.start {|h| h.request(form)}
     end
