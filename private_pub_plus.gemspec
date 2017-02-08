@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "private_pub_plus"
-  s.version     = "1.0.0"
+  s.version     = "1.0.1"
   s.author      = "Amrit Singh"
   s.email       = "amrit0403@gmail.com"
   s.homepage    = "http://github.com/amritsingh/private_pub"
