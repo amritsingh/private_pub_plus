@@ -30,6 +30,15 @@ Next, start up Faye using the rackup file that was generated.
 rackup private_pub.ru -s thin -E production
 ```
 
+If you want to run Faye using puma:
+Comment this line in private_pub.ru
+```
+# Faye::WebSocket.load_adapter('thin')
+```
+Run puma server:
+```
+puma private_pub.ru -C config/puma.rb
+```
 ## Usage
 
 Use the `publish_to` method to send data to that channel.
